@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 // test instance describes the behaviour of TestClass object creation
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
+@TestMethodOrder(value = MethodOrderer.Alphanumeric.class)
 public class CalcTest {
 
     CalcTest(){
@@ -22,14 +23,14 @@ public class CalcTest {
         System.out.println("run before each test");
     }
     @Test
-    public void testAdd(){
+    public void bTest(){
         int actual = c.add(5, 2);
         int expected = 7;
         assertEquals(expected, actual);
     }
 
     @Test
-    public void testSubtract(){
+    public void aTest(){
         int actual = c.subtract(10, 2);
         int expected = 8;
         assertEquals(expected, actual);
