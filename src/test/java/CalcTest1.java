@@ -1,10 +1,13 @@
 import org.junit.jupiter.api.*;
 
+import java.lang.reflect.Method;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class CalcTest {
+@DisplayNameGeneration(value = CalcTest1.CustomDisplayNameGenerator.class)
+public class CalcTest1 {
 
-    CalcTest(){
+    CalcTest1(){
         System.out.println("CalcTest constructor");
     }
 
@@ -40,5 +43,24 @@ public class CalcTest {
     @AfterAll
     static void afterAll(){
         System.out.println("run after all the test only once");
+    }
+
+    static class CustomDisplayNameGenerator extends DisplayNameGenerator.ReplaceUnderscores{
+
+        @Override
+        public String generateDisplayNameForClass(Class<?> testClass) {
+            return "Test cases for " + testClass.getName();
+        }
+
+        @Override
+        public String generateDisplayNameForNestedClass(Class<?> nestedClass) {
+            return super.generateDisplayNameForNestedClass(nestedClass);
+        }
+
+        @Override
+        public String generateDisplayNameForMethod(Class<?> testClass, Method testMethod) {
+            String name = testClass.getSimpleName() + " " + testMethod.getName();
+            return name.replace('_', ' ');
+        }
     }
 }

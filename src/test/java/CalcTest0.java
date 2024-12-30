@@ -2,9 +2,10 @@ import org.junit.jupiter.api.*;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class CalcTest {
+//@DisplayNameGeneration(value = DisplayNameGenerator.ReplaceUnderscores.class)
+public class CalcTest0 {
 
-    CalcTest(){
+    CalcTest0(){
         System.out.println("CalcTest constructor");
     }
 
