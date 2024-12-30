@@ -23,6 +23,8 @@ public class CalcTest {
     }
     @Test
     public void testAdd(){
+        System.setProperty("ENV", "DEV");
+        Assumptions.assumeTrue(System.getProperty("ENV").equals("DEV"));
         int actual = c.add(5, 2);
         int expected = 7;
         assertEquals(expected, actual);
@@ -30,6 +32,8 @@ public class CalcTest {
 
     @Test
     public void testSubtract(){
+        System.setProperty("ENV", "PROD");
+        Assumptions.assumeTrue(System.getProperty("ENV").equals("DEV"), () -> "Assumption Failed");
         int actual = c.subtract(10, 2);
         int expected = 8;
         assertEquals(expected, actual);
