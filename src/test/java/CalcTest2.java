@@ -1,16 +1,14 @@
 import org.junit.jupiter.api.*;
-import org.junit.jupiter.api.condition.DisabledOnOs;
-import org.junit.jupiter.api.condition.EnabledOnOs;
-import org.junit.jupiter.api.condition.OS;
+import org.junit.jupiter.api.condition.DisabledIfSystemProperty;
+import org.junit.jupiter.api.condition.EnabledIfSystemProperty;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 // test instance describes the behaviour of TestClass object creation
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-@EnabledOnOs(value = {OS.WINDOWS, OS.MAC})
-public class CalcTest {
+public class CalcTest2 {
 
-    CalcTest(){
+    CalcTest2(){
         System.out.println("CalcTest constructor");
     }
 
@@ -26,7 +24,7 @@ public class CalcTest {
         System.out.println("run before each test");
     }
     @Test
-    @EnabledOnOs(value = {OS.LINUX})
+    @EnabledIfSystemProperty(named = "java.vm.vendor", matches = "Ubuntu")
     public void testAdd(){
         int actual = c.add(5, 2);
         int expected = 7;
@@ -34,7 +32,7 @@ public class CalcTest {
     }
 
     @Test
-    @DisabledOnOs(value = {OS.LINUX})
+    @DisabledIfSystemProperty(named = "java.vm.vendor", matches = "Ubuntu")
     public void testSubtract(){
         int actual = c.subtract(10, 2);
         int expected = 8;

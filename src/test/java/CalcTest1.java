@@ -1,16 +1,17 @@
 import org.junit.jupiter.api.*;
-import org.junit.jupiter.api.condition.DisabledOnOs;
-import org.junit.jupiter.api.condition.EnabledOnOs;
-import org.junit.jupiter.api.condition.OS;
+import org.junit.jupiter.api.condition.DisabledOnJre;
+import org.junit.jupiter.api.condition.EnabledForJreRange;
+import org.junit.jupiter.api.condition.EnabledOnJre;
+import org.junit.jupiter.api.condition.JRE;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 // test instance describes the behaviour of TestClass object creation
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-@EnabledOnOs(value = {OS.WINDOWS, OS.MAC})
-public class CalcTest {
+@EnabledOnJre(value = {JRE.JAVA_17, JRE.JAVA_8, JRE.JAVA_11})
+public class CalcTest1 {
 
-    CalcTest(){
+    CalcTest1(){
         System.out.println("CalcTest constructor");
     }
 
@@ -26,15 +27,21 @@ public class CalcTest {
         System.out.println("run before each test");
     }
     @Test
-    @EnabledOnOs(value = {OS.LINUX})
+    @EnabledOnJre(value = {JRE.JAVA_17})
     public void testAdd(){
         int actual = c.add(5, 2);
         int expected = 7;
         assertEquals(expected, actual);
     }
-
     @Test
-    @DisabledOnOs(value = {OS.LINUX})
+    @EnabledForJreRange(min = JRE.JAVA_8, max = JRE.JAVA_21)
+    public void testAdd1(){
+        int actual = c.add(5, 2);
+        int expected = 7;
+        assertEquals(expected, actual);
+    }
+    @Test
+    @DisabledOnJre(value = {JRE.JAVA_17})
     public void testSubtract(){
         int actual = c.subtract(10, 2);
         int expected = 8;
